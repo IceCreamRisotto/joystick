@@ -9,16 +9,18 @@ public class jump : MonoBehaviour {
 
     public float jumpHeight=1000f;
     private Rigidbody2D player;
+    private Animator animator;
 
     private void Awake()
     {
         player = GameObject.Find("chicken").GetComponent<Rigidbody2D>();
+        animator = gameObject.GetComponent<Animator>();
     }
 
     private void FixedUpdate()
     {
-        Debug.Log(jumping);
-        Debug.Log(isGround);
+       // Debug.Log(jumping);
+        //Debug.Log(isGround);
         SetJumpState();
         StateMachine();
     }
@@ -40,7 +42,8 @@ public class jump : MonoBehaviour {
     }
 
     void StateMachine() {
-
+        animator.SetBool("Jumping", jumping);
+        animator.SetBool("Ground", isGround);
     }
 
     private void OnCollisionEnter2D(Collision2D co)
